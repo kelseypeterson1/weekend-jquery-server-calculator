@@ -52,7 +52,7 @@ function receiveHistory() {
         console.log('history received from server', response);
         // answer and the history of prior equations is rendered to DOM
         equationHistory = response;
-        renderToDom(response);
+        renderToDom();
     }).catch(function(response) {
         console.log('history wasn\'t received from the server', response);
     })
@@ -78,7 +78,7 @@ function divisionOperator() {
     operator = "/"
 }
 
-function renderToDom(answer) {
+function renderToDom() {
 // rendering the equation history to the DOM
     $('#equation-history').empty()
     for (equation of equationHistory) {
