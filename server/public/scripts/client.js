@@ -36,7 +36,7 @@ function receiveMath() {
     }).then(function(response) {
         console.log('answer received from server', response);
         // answer rendered to DOM
-        renderSearchToDom(response);
+        // renderSearchToDom(response);
     }).catch(function(response) {
         console.log('answer wasn\'t received from the server', response);
     })

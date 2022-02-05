@@ -14,8 +14,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 // <GET & POSTS>---------------------------------------
 // this POST will receive numbers from the client
 app.post('/numbers', function(req, res) {
-    let firstNumber = req.body.firstNumber;
-    let secondNumber = req.body.secondNumber;
+    let firstNumber = Number(req.body.firstNumber);
+    let secondNumber = Number(req.body.secondNumber);
     let operator = req.body.operator;
     console.log("First number is", firstNumber)
     console.log("Second number is", secondNumber)
@@ -23,21 +23,41 @@ app.post('/numbers', function(req, res) {
     
     // send back a status code of 201
     res.sendStatus(201);
-    // doMath(firstNumber, secondNumber);
+    doMath(firstNumber, secondNumber, operator);
 })
 
 // this GET will send back the answer to the math to the client.js
 app.get('/answer', function(req, res) {
-    console.log('Request at /answer was made', req.body);
-    // res.send(answer);
-
+    console.log('Request at /answer was made. Sending answer', answer);
+    res.send(answer);
 });
 // </GET & POSTS>---------------------------------------
 
 
 // <FUNCTIONS & VARIABLES>-----------------------------
-function doMath(firstNumber, secondNumber) {
+let answer;
 
+function doMath(firstNumber, secondNumber, operator) {
+    let add = firstNumber + secondNumber;
+    let subtract = firstNumber - secondNumber;
+    let multiply = firstNumber * secondNumber;
+    let divide = firstNumber / secondNumber;
+    
+    switch (operator) {
+        case '+':
+            answer = add;
+            break;
+        case '-':
+            answer = subtract;
+            break;
+        case '*':
+            answer = multiply;
+            break;
+        case '/':
+            answer = divide;
+            break;
+
+    }
 }
 
 
