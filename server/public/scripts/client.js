@@ -2,11 +2,12 @@ $(document).ready(onReady);
 
 function onReady() {
     console.log('test')
-    $('#equals-sign').on('click', sendInputs)
-    $('#plus-sign').on('click', plusOperator)
-    $('#minus-sign').on('click', minusOperator)
-    $('#multiplication-sign').on('click', multiplicationOperator)
-    $('#division-sign').on('click', divisionOperator)
+    $('#equals-sign').on('click', sendInputs);
+    $('#plus-sign').on('click', plusOperator);
+    $('#minus-sign').on('click', minusOperator);
+    $('#multiplication-sign').on('click', multiplicationOperator);
+    $('#division-sign').on('click', divisionOperator);
+    $('#clear-sign').on('click', clearEverything);
 } // end onReady
 
 
@@ -23,6 +24,8 @@ function sendInputs() {
         }
     }).then(function(response) {
         console.log('Sent numbers to the server');
+        $('#first-number-input').val('')
+        $('#second-number-input').val('')
         receiveAnswer();
     }).catch(function(response) {
         console.log('Wasn\'t able to send numbers to the server', response)
@@ -79,15 +82,23 @@ function divisionOperator() {
 }
 
 function renderToDom() {
-// rendering the equation history to the DOM
+    // rendering the equation history to the DOM
     $('#equation-history').empty()
-    for (equation of equationHistory) {
+    for (let equation of equationHistory) {
         $('#equation-history').append(
             `<li>${equation}</li>`
-        )
+            )
+        }
+        // rendering the answer to the DOM
+        $('#result').empty()
+        $('#result').append(answer)
     }
-// rendering the answer to the DOM
-    $('#result').empty()
-    $('#result').append(answer)
-}
-// </FUNCTIONS & VARIABLES>-----------------------------
+    
+    // remove answers and equation histories in the DOM
+    function clearEverything() {
+        $('#result').empty()
+        $('#equation-history').empty()
+        $('#first-number-input').val('')
+        $('#second-number-input').val('')
+    }
+    // </FUNCTIONS & VARIABLES>-----------------------------
