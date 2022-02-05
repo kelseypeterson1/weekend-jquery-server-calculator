@@ -37,6 +37,7 @@ function receiveAnswer() {
     }).then(function(response) {
         console.log('answer received from server', response);
         answer = response;
+        receiveHistory();
     }).catch(function(response) {
         console.log('answer wasn\'t received from the server', response);
     })
@@ -50,7 +51,8 @@ function receiveHistory() {
     }).then(function(response) {
         console.log('history received from server', response);
         // answer and the history of prior equations is rendered to DOM
-        // renderToDom(response);
+        equationHistory = response;
+        renderToDom(response);
     }).catch(function(response) {
         console.log('history wasn\'t received from the server', response);
     })
@@ -61,6 +63,7 @@ function receiveHistory() {
 // <FUNCTIONS & VARIABLES>-----------------------------
 let answer;
 let operator;
+let equationHistory;
 
 function plusOperator() {
     operator = "+"
@@ -76,6 +79,15 @@ function divisionOperator() {
 }
 
 function renderToDom(answer) {
-    Search
+// rendering the equation history to the DOM
+    $('#equation-history').empty()
+    for (equation of equationHistory) {
+        $('#equation-history').append(
+            `<li>${equation}</li>`
+        )
+    }
+// rendering the answer to the DOM
+    $('#result').empty()
+    $('#result').append(answer)
 }
 // </FUNCTIONS & VARIABLES>-----------------------------
