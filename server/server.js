@@ -16,8 +16,11 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.post('/numbers', function(req, res) {
     let firstNumber = req.body.firstNumber;
     let secondNumber = req.body.secondNumber;
+    let operator = req.body.operator;
     console.log("First number is", firstNumber)
     console.log("Second number is", secondNumber)
+    console.log("Operator is", operator)
+    
     // send back a status code of 201
     res.sendStatus(201);
     // doMath(firstNumber, secondNumber);
@@ -32,12 +35,14 @@ app.get('/answer', function(req, res) {
 // </GET & POSTS>---------------------------------------
 
 
-// <FUNCTIONS>------------------------------------------
-// function doMath(firstNumber, secondNumber) {
+// <FUNCTIONS & VARIABLES>-----------------------------
+function doMath(firstNumber, secondNumber) {
 
-// }
+}
 
-// </FUNCTIONS>------------------------------------------
+
+
+// </FUNCTIONS & VARIABLES>---------------------------
 
 
 // <SERVER SETUP>-------------------------------------
