@@ -1,7 +1,7 @@
 $(document).ready(onReady);
 
 function onReady() {
-    console.log('test')
+    clearEverything();
     $('#equals-sign').on('click', sendInputs);
     $('#plus-sign').on('click', plusOperator);
     $('#minus-sign').on('click', minusOperator);
@@ -60,6 +60,18 @@ function receiveHistory() {
         console.log('history wasn\'t received from the server', response);
     })
 } // end receiveHistory
+
+// tell server to clear history
+function communicateClear() {
+    $.ajax({
+        method: 'GET',
+        url: '/clear'
+    }).then(function(response) {
+        console.log('server received clear message', response);
+    }).catch(function(response) {
+        console.log('server did not receive clear message', response);
+    })
+} // end communicateClear
 // </GET & POSTS>---------------------------------------
 
 
@@ -100,5 +112,6 @@ function renderToDom() {
         $('#equation-history').empty()
         $('#first-number-input').val('')
         $('#second-number-input').val('')
+        communicateClear();
     }
     // </FUNCTIONS & VARIABLES>-----------------------------

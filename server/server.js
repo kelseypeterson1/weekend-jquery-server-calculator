@@ -44,6 +44,13 @@ app.get('/history', function(req, res) {
     res.send(equationHistory);
 }); // end app.get
 
+// this GET will clear the history of equations on the server side
+app.get('/clear', function(req, res) {
+    equationHistory = [];
+    console.log('Request at /clear was made. Equation history is erased', equationHistory);
+    res.sendStatus(200);
+}); // end app.get
+
 // </GET & POSTS>---------------------------------------
 
 
