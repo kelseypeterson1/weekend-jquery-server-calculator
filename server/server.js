@@ -24,18 +24,25 @@ app.post('/numbers', function(req, res) {
     // send back a status code of 201
     res.sendStatus(201);
     doMath(firstNumber, secondNumber, operator);
+    let equation = `${firstNumber} ${operator} ${secondNumber} = ${answer}`
+    numberHistory.push(equation)
 })
 
 // this GET will send back the answer to the math to the client.js
 app.get('/answer', function(req, res) {
     console.log('Request at /answer was made. Sending answer', answer);
-    res.send(answer);
+    let package = {
+        answer: answer.toString(),
+        numberHistory: numberHistory
+    }
+    res.send(package);
 });
 // </GET & POSTS>---------------------------------------
 
 
 // <FUNCTIONS & VARIABLES>-----------------------------
-let answer;
+let numberHistory = [];
+let answer = [];
 
 function doMath(firstNumber, secondNumber, operator) {
     let add = firstNumber + secondNumber;
@@ -56,12 +63,8 @@ function doMath(firstNumber, secondNumber, operator) {
         case '/':
             answer = divide;
             break;
-
     }
 }
-
-
-
 // </FUNCTIONS & VARIABLES>---------------------------
 
 
