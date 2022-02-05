@@ -7,9 +7,11 @@ function onReady() {
     $('#minus-sign').on('click', minusOperator)
     $('#multiplication-sign').on('click', multiplicationOperator)
     $('#division-sign').on('click', divisionOperator)
-}
+} // end onReady
 
 
+// <GET & POSTS>---------------------------------------
+// send inputs to server
 function sendInputs() {
     $.ajax({
         method: 'POST',
@@ -21,28 +23,43 @@ function sendInputs() {
         }
     }).then(function(response) {
         console.log('Sent numbers to the server');
-        receiveMath();
+        receiveAnswer();
     }).catch(function(response) {
         console.log('Wasn\'t able to send numbers to the server', response)
     })
-}
+} // end sendInputs
 
-
-function receiveMath() {
-    // get the answer to the equation from the server
+// get the answer to the equation from the server
+function receiveAnswer() {
     $.ajax({
         method: 'GET',
         url: '/answer'
     }).then(function(response) {
         console.log('answer received from server', response);
-        // answer rendered to DOM
-        // renderToDom(response);
+        answer = response;
     }).catch(function(response) {
         console.log('answer wasn\'t received from the server', response);
     })
-}
+} // end receiveAnswer
+
+// get the history of equations from the server
+function receiveHistory() {
+    $.ajax({
+        method: 'GET',
+        url: '/history'
+    }).then(function(response) {
+        console.log('history received from server', response);
+        // answer and the history of prior equations is rendered to DOM
+        // renderToDom(response);
+    }).catch(function(response) {
+        console.log('history wasn\'t received from the server', response);
+    })
+} // end receiveHistory
+// </GET & POSTS>---------------------------------------
 
 
+// <FUNCTIONS & VARIABLES>-----------------------------
+let answer;
 let operator;
 
 function plusOperator() {
@@ -61,3 +78,4 @@ function divisionOperator() {
 function renderToDom(answer) {
     Search
 }
+// </FUNCTIONS & VARIABLES>-----------------------------

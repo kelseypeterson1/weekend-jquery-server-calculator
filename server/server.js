@@ -20,23 +20,30 @@ app.post('/numbers', function(req, res) {
     console.log("First number is", firstNumber)
     console.log("Second number is", secondNumber)
     console.log("Operator is", operator)
-    
+
     // send back a status code of 201
     res.sendStatus(201);
+    
+    // figuring out the answer to the equation
     doMath(firstNumber, secondNumber, operator);
+
+    // adding the equation sent from the client to the numberHistory variable
     let equation = `${firstNumber} ${operator} ${secondNumber} = ${answer}`
     numberHistory.push(equation)
-})
+}) // end app.post
 
 // this GET will send back the answer to the math to the client.js
 app.get('/answer', function(req, res) {
     console.log('Request at /answer was made. Sending answer', answer);
-    let package = {
-        answer: answer.toString(),
-        numberHistory: numberHistory
-    }
-    res.send(package);
-});
+    res.send(answer.toString());
+}) // end app.get
+
+// this GET will send back the history of equations to the client.js
+app.get('/history', function(req, res) {
+    console.log('Request at /history was made. Sending answer', answer);
+    res.send(numberHistory);
+}); // end app.get
+
 // </GET & POSTS>---------------------------------------
 
 
