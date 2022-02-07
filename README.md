@@ -2,6 +2,4 @@
 
 ## Description
 
-Your project description goes here. What problem did you solve? How did you solve it?
-
-Additional README details can be found [here](https://github.com/PrimeAcademy/readme-template/blob/master/README.md).
+This calculator will add, subtract, divide, or multiply 2 numbers. All of the data including the history of prior calculations will be stored on the server.
